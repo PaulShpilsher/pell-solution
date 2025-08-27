@@ -1,34 +1,55 @@
-//! # Pell Equation Solver
+//! # The 991 Pell Puzzle
 //!
-//! This crate provides efficient algorithms for solving Pell equations of the form:
-//! x² - D·y² = 1
+//! ## The Mathematical Mystery
 //!
-//! where D is a positive non-square integer.
+//! Long ago, mathematicians wondered about numbers that hide behind the square root symbol.
+//! Take this mysterious expression:
 //!
-//! ## Features
+//! ```text
+//! √(991 · n² + 1)
+//! ```
 //!
-//! - Find the minimal solution using continued fractions
-//! - Generate the k-th solution using fast exponentiation
-//! - Support for arbitrarily large integers using BigInt
+//! At first glance, it almost always gives an **irrational** number — something messy that 
+//! can't be written as a simple fraction or integer. For countless values of n, the expression 
+//! stubbornly refuses to be a whole number.
 //!
-//! ## Example
+//! But then comes the **surprise**: After billions and billions of tries, suddenly, at
+//!
+//! ```text
+//! n = 12055735790331359447442538767
+//! ```
+//!
+//! the square root becomes a **perfect integer**:
+//!
+//! ```text
+//! √(991 · n² + 1) = 379516400906811930638014896080
+//! ```
+//!
+//! Like magic, the irrational veil lifts.
+//!
+//! ## The Hidden Mathematics
+//!
+//! Behind this puzzle lies a classic **Pell equation**: `m² - 991n² = 1`
+//!
+//! This crate provides efficient algorithms for solving such equations using continued fractions
+//! and fast exponentiation, revealing the infinite staircase of solutions.
+//!
+//! ## Solving the Puzzle
 //!
 //! ```rust
-//! use pell991::{pell_min_solution, pell_solution_k};
+//! use pell991::pell_min_solution;
 //!
-//! let d = 2;
-//! let (x1, y1) = pell_min_solution(d).unwrap();
-//! println!("Minimal solution: x={}, y={}", x1, y1); // x=3, y=2
-//!
-//! let (x2, y2) = pell_solution_k(d, &x1, &y1, 2).unwrap();
-//! println!("Second solution: x={}, y={}", x2, y2); // x=17, y=12
+//! // Find the magical values that make √(991·n² + 1) a perfect integer
+//! let (m, n) = pell_min_solution(991).unwrap();
+//! println!("n = {}", n);  // 12055735790331359447442538767
+//! println!("m = {}", m);  // 379516400906811930638014896080
 //! ```
+//!
 
 pub mod error;
 pub mod solver;
 pub mod utils;
 
-// Re-export the main API
 pub use error::PellError;
 pub use solver::{
     pell_min_solution, 

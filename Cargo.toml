@@ -2,11 +2,11 @@
 [package]
 name = "pell991"
 version = "0.1.0"
-edition = "2021"
-authors = ["Your Name <your.email@example.com>"]
-description = "A high-performance Rust library for solving Pell equations"
+edition = "2024"
+rust-version = "1.85"
+description = "Solve the 991 Pell Puzzle: Find when √(991·n² + 1) becomes a perfect integer"
 license = "MIT"
-repository = "https://github.com/yourusername/pell991"
+repository = "https://github.com/PaulShpilsher/pell-solution"
 keywords = ["mathematics", "number-theory", "pell-equation", "continued-fractions"]
 categories = ["mathematics", "algorithms"]
 
