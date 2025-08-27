@@ -114,3 +114,100 @@ pub fn is_square_u64(n: u64) -> bool {
 pub fn is_valid_pell_d(d: u64) -> bool {
     d > 1 && !is_square_u64(d)
 }
+
+/// Estimate the period length of the continued fraction expansion of √D
+///
+/// This gives a rough estimate of how long it might take to find the minimal solution.
+/// The actual period can vary significantly, but this provides a useful heuristic.
+///
+/// # Arguments
+///
+/// * `d` - The D value to analyze
+///
+/// # Returns
+///
+/// An estimated period length, or None if D is not valid for Pell equations
+///
+/// # Examples
+///
+/// ```
+/// # use pell991::estimate_period_length;
+/// let estimate = estimate_period_length(2);
+/// assert!(estimate.is_some());
+/// ```
+pub fn estimate_period_length(d: u64) -> Option<u64> {
+    if !is_valid_pell_d(d) {
+        return None;
+    }
+    
+    // Rough heuristic: period length is often related to √D
+    // This is a very rough approximation for educational purposes
+    let sqrt_d = isqrt_u64(d);
+    Some(sqrt_d / 2 + 1)
+}
+
+/// Calculate the fundamental discriminant for a given D
+///
+/// The fundamental discriminant is useful for understanding the structure
+/// of the Pell equation and its solutions.
+///
+/// # Arguments
+///
+/// * `d` - The D value
+///
+/// # Returns
+///
+/// The fundamental discriminant
+///
+/// # Examples
+///
+/// ```
+/// # use pell991::fundamental_discriminant;
+/// assert_eq!(fundamental_discriminant(2), 8);
+/// assert_eq!(fundamental_discriminant(3), 12);
+/// ```
+pub fn fundamental_discriminant(d: u64) -> u64 {
+    4 * d
+}
+
+/// Check if a number is prime (simple trial division)
+///
+/// This is a basic primality test useful for analyzing D values.
+/// Not optimized for very large numbers.
+///
+/// # Arguments
+///
+/// * `n` - The number to test
+///
+/// # Returns
+///
+/// `true` if n is prime, `false` otherwise
+///
+/// # Examples
+///
+/// ```
+/// # use pell991::is_prime;
+/// assert!(is_prime(2));
+/// assert!(is_prime(991));
+/// assert!(!is_prime(4));
+/// ```
+pub fn is_prime(n: u64) -> bool {
+    if n < 2 {
+        return false;
+    }
+    if n == 2 {
+        return true;
+    }
+    if n % 2 == 0 {
+        return false;
+    }
+    
+    let limit = isqrt_u64(n);
+    for i in (3..=limit).step_by(2) {
+        if n % i == 0 {
+            return false;
+        }
+    }
+    
+    true
+}

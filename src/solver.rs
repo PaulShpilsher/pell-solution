@@ -268,3 +268,95 @@ pub fn pell_solutions(d: u64, count: usize) -> Result<Vec<(BigInt, BigInt)>, Pel
     
     Ok(solutions)
 }
+
+/// Iterator for generating Pell equation solutions on-demand
+///
+/// This iterator generates solutions lazily, which is memory-efficient
+/// for large sequences and allows for infinite iteration.
+///
+/// # Examples
+///
+/// ```
+/// # use pell991::PellSolutionIterator;
+/// let mut iter = PellSolutionIterator::new(2).unwrap();
+/// let first_three: Vec<_> = iter.take(3).collect();
+/// assert_eq!(first_three.len(), 3);
+/// ```
+pub struct PellSolutionIterator {
+    d: u64,
+    x1: BigInt,
+    y1: BigInt,
+    current_x: BigInt,
+    current_y: BigInt,
+    big_d: BigInt,
+    k: u64,
+}
+
+impl PellSolutionIterator {
+    /// Create a new iterator for Pell equation solutions
+    ///
+    /// # Arguments
+    ///
+    /// * `d` - The coefficient D in the Pell equation
+    ///
+    /// # Returns
+    ///
+    /// A `Result` containing the iterator, or a `PellError` if D is invalid.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// # use pell991::PellSolutionIterator;
+    /// let iter = PellSolutionIterator::new(2).unwrap();
+    /// ```
+    pub fn new(d: u64) -> Result<Self, PellError> {
+        let (x1, y1) = pell_min_solution(d)?;
+        let big_d = BigInt::from(d);
+        
+        Ok(PellSolutionIterator {
+            d,
+            current_x: x1.clone(),
+            current_y: y1.clone(),
+            x1,
+            y1,
+            big_d,
+            k: 1,
+        })
+    }
+    
+    /// Get the current k value (1-indexed)
+    pub fn current_k(&self) -> u64 {
+        self.k
+    }
+    
+    /// Get the D value for this iterator
+    pub fn d_value(&self) -> u64 {
+        self.d
+    }
+    
+    /// Reset the iterator to the beginning
+    pub fn reset(&mut self) {
+        self.current_x = self.x1.clone();
+        self.current_y = self.y1.clone();
+        self.k = 1;
+    }
+}
+
+impl Iterator for PellSolutionIterator {
+    type Item = (BigInt, BigInt);
+    
+    fn next(&mut self) -> Option<Self::Item> {
+        let result = (self.current_x.clone(), self.current_y.clone());
+        
+        // Compute next solution using recurrence relation
+        // (x_{k+1}, y_{k+1}) = (x1 * x_k + d * y1 * y_k, x1 * y_k + y1 * x_k)
+        let next_x = &self.x1 * &self.current_x + &self.big_d * &self.y1 * &self.current_y;
+        let next_y = &self.x1 * &self.current_y + &self.y1 * &self.current_x;
+        
+        self.current_x = next_x;
+        self.current_y = next_y;
+        self.k += 1;
+        
+        Some(result)
+    }
+}

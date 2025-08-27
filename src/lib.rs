@@ -58,8 +58,16 @@ pub use solver::{
     pell_solution_k_unchecked,
     pell_solutions,
     verify_pell_solution,
+    PellSolutionIterator,
 };
-pub use utils::{isqrt_u64, is_square_u64, is_valid_pell_d};
+pub use utils::{
+    isqrt_u64, 
+    is_square_u64, 
+    is_valid_pell_d, 
+    estimate_period_length, 
+    fundamental_discriminant, 
+    is_prime
+};
 
 /// Re-export BigInt for convenience
 pub use num_bigint::BigInt;
