@@ -14,8 +14,8 @@ fn main() -> Result<(), PellError> {
     let (m, n) = pell_min_solution(d)?;
     
     println!("The magical solution found!");
-    println!("   n = {}", n);
-    println!("   m = {}", m);
+    println!("   n = {n}");
+    println!("   m = {m}");
     println!();
     
     // Verify the solution
@@ -23,7 +23,7 @@ fn main() -> Result<(), PellError> {
     println!("Verified: m² - 991n² = 1");
     println!();
     
-    println!("This means √(991·{}² + 1) = {}", n, m);
+    println!("This means √(991·{n}² + 1) = {m}");
     println!("   After billions of tries, the irrational veil finally lifts!");
     println!();
     
@@ -32,9 +32,9 @@ fn main() -> Result<(), PellError> {
     // Generate a few more solutions
     for k in 1..=5 {
         let (xk, yk) = pell_solution_k(d, &m, &n, k)?;
-        println!("\nSolution {}:", k);
-        println!("   x = {}", xk);
-        println!("   y = {}", yk);
+        println!("\nSolution {k}:");
+        println!("   x = {xk}");
+        println!("   y = {yk}");
         if k == 1 {
             println!("   This is our magical pair!");
         }

@@ -214,7 +214,10 @@ pub fn verify_pell_solution(d: u64, x: &BigInt, y: &BigInt) -> bool {
     lhs == rhs
 }
 
-/// Generate multiple Pell solutions efficiently
+/// Generate multiple Pell solutions efficiently using iterative approach
+///
+/// This is more efficient than calling `pell_solution_k` repeatedly as it
+/// uses the recurrence relation directly without binary exponentiation.
 ///
 /// # Arguments
 ///
@@ -241,9 +244,26 @@ pub fn pell_solutions(d: u64, count: usize) -> Result<Vec<(BigInt, BigInt)>, Pel
     let (x1, y1) = pell_min_solution(d)?;
     let mut solutions = Vec::with_capacity(count);
     
-    for k in 1..=count {
-        let (xk, yk) = pell_solution_k(d, &x1, &y1, k as u64)?;
-        solutions.push((xk, yk));
+    // Add the first solution
+    solutions.push((x1.clone(), y1.clone()));
+    
+    if count == 1 {
+        return Ok(solutions);
+    }
+    
+    // Use iterative approach for better performance
+    // (x_k, y_k) = (x1 * x_{k-1} + d * y1 * y_{k-1}, x1 * y_{k-1} + y1 * x_{k-1})
+    let mut x_prev = x1.clone();
+    let mut y_prev = y1.clone();
+    let big_d = BigInt::from(d);
+    
+    for _ in 2..=count {
+        let x_next = &x1 * &x_prev + &big_d * &y1 * &y_prev;
+        let y_next = &x1 * &y_prev + &y1 * &x_prev;
+        
+        solutions.push((x_next.clone(), y_next.clone()));
+        x_prev = x_next;
+        y_prev = y_next;
     }
     
     Ok(solutions)

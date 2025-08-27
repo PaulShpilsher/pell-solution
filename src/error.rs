@@ -17,9 +17,9 @@ pub enum PellError {
 impl fmt::Display for PellError {
     fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
         match self {
-            PellError::InvalidD(d) => write!(f, "D must be > 1, got {}", d),
-            PellError::PerfectSquare(d) => write!(f, "D must be non-square, got {} which is {}²", d, isqrt_u64(*d)),
-            PellError::InvalidK(k) => write!(f, "k must be > 0, got {}", k),
+            PellError::InvalidD(d) => write!(f, "D must be > 1, got {d}"),
+            PellError::PerfectSquare(d) => write!(f, "D must be non-square, got {d} which is {}²", isqrt_u64(*d)),
+            PellError::InvalidK(k) => write!(f, "k must be > 0, got {k}"),
         }
     }
 }

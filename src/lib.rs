@@ -59,4 +59,7 @@ pub use solver::{
     pell_solutions,
     verify_pell_solution,
 };
-pub use utils::{isqrt_u64, is_square_u64};
+pub use utils::{isqrt_u64, is_square_u64, is_valid_pell_d};
+
+/// Re-export BigInt for convenience
+pub use num_bigint::BigInt;
