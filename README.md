@@ -466,6 +466,7 @@ Pell equations appear in:
 | 100-1000 | 100-500μs | 15-50 | ~240-800 bytes |
 | 1000+ | 200μs-2ms | 30+ | ~480+ bytes |
 
+
 ### Memory Efficiency Comparison
 
 | Method | Memory Usage | Use Case |
