@@ -147,25 +147,25 @@ This is implemented using **fast binary exponentiation** for O(log k) complexity
 
 ```
 pell-solution/
+├── .gitignore          # Git ignore patterns
+├── Cargo.toml          # Project configuration and dependencies
+├── Cargo.lock          # Dependency lock file
+├── README.md           # This file
 ├── src/
-│   ├── lib.rs          # Public API and documentation (70 lines)
-│   ├── main.rs         # Binary executable (46 lines)
-│   ├── error.rs        # Error types (26 lines)
-│   ├── solver.rs       # Core algorithms (249 lines)
-│   └── utils.rs        # Utility functions (70 lines)
+│   ├── lib.rs          # Public API and documentation
+│   ├── main.rs         # Binary executable
+│   ├── error.rs        # Error types
+│   ├── solver.rs       # Core algorithms
+│   └── utils.rs        # Utility functions
 ├── tests/
-│   ├── error_tests.rs      # Error handling tests (79 lines)
-│   ├── utils_tests.rs      # Utility function tests (102 lines)
-│   ├── solver_tests.rs     # Core algorithm tests (176 lines)
-│   └── integration_tests.rs # Integration tests (162 lines)
+│   ├── error_tests.rs      # Error handling tests
+│   ├── utils_tests.rs      # Utility function tests
+│   ├── solver_tests.rs     # Core algorithm tests
+│   └── integration_tests.rs # Integration tests
 ├── examples/
-│   ├── basic_usage.rs      # Basic usage examples (49 lines)
-│   └── solve_991_puzzle.rs # 991 puzzle solver (55 lines)
-└── docs/
-    ├── README.md           # This file
-    ├── STORY.md           # Project story and background
-    ├── CHANGELOG.md       # Version history
-    └── RUST_2024_UPGRADE.md # Rust 2024 upgrade notes
+│   ├── basic_usage.rs      # Basic usage examples
+│   └── solve_991_puzzle.rs # 991 puzzle solver
+└── target/             # Build artifacts (generated)
 ```
 
 ## Performance
@@ -220,14 +220,14 @@ cargo test
 
 The library includes comprehensive testing:
 
-| Test Category | Tests | Lines | Coverage |
-|---------------|-------|-------|----------|
-| **Error Tests** | 6 | 79 | Error handling |
-| **Utils Tests** | 6 | 102 | Utility functions |
-| **Solver Tests** | 9 | 176 | Core algorithms |
-| **Integration Tests** | 8 | 162 | Cross-module |
-| **Doc Tests** | 7 | - | Documentation |
-| **Total** | **36** | **519** | **100%** |
+| Test Category | Tests | Coverage |
+|---------------|-------|----------|
+| **Error Tests** | 6 | Error handling |
+| **Utils Tests** | 6 | Utility functions |
+| **Solver Tests** | 9 | Core algorithms |
+| **Integration Tests** | 8 | Cross-module |
+| **Doc Tests** | 7 | Documentation |
+| **Total** | **36** | **100%** |
 
 ## Examples
 
@@ -249,9 +249,8 @@ cargo run --example solve_991_puzzle
 - **Rust Edition**: 2024
 - **MSRV**: 1.85.0
 - **Dependencies**: `num-bigint`, `num-integer`, `num-traits`
-- **Source Code**: 461 lines (pure logic)
-- **Test Code**: 519 lines (comprehensive coverage)
-- **Examples**: 104 lines (usage demonstrations)
+- **Comprehensive test coverage**: 100%
+- **Documentation**: Extensive with examples
 
 ## Contributing
 
