@@ -51,7 +51,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{}", "-".repeat(40));
     
     let d = 2;
-    let mut iter = PellSolutionIterator::new(d)?;
+    let iter = PellSolutionIterator::new(d)?;
     
     println!("{:>3} | {:>8} | {:>8} | {:>10} | {:>10}", "k", "x_digits", "y_digits", "x_growth", "y_growth");
     println!("{}", "-".repeat(50));
@@ -190,7 +190,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("{}", "-".repeat(45));
     
     let verification_d = 13;
-    let mut iter = PellSolutionIterator::new(verification_d)?;
+    let iter = PellSolutionIterator::new(verification_d)?;
     
     println!("Verifying Pell equation properties for D={}:", verification_d);
     

@@ -102,7 +102,7 @@ fn test_iterator_error_handling() {
 
 #[test]
 fn test_iterator_large_sequences() {
-    let mut iter = PellSolutionIterator::new(2).unwrap();
+    let iter = PellSolutionIterator::new(2).unwrap();
     
     // Test that we can generate a reasonably large sequence
     let solutions: Vec<_> = iter.take(50).collect();

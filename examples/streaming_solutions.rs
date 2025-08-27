@@ -11,7 +11,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("📋 Example 1: Basic Iterator Usage (D=2)");
     println!("{}", "-".repeat(35));
     
-    let mut iter = PellSolutionIterator::new(2)?;
+    let iter = PellSolutionIterator::new(2)?;
     
     println!("First 5 solutions:");
     for (i, (x, y)) in iter.take(5).enumerate() {
@@ -124,7 +124,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
     println!("♾️  Example 5: Conditional Processing of Infinite Sequence");
     println!("{}", "-".repeat(50));
     
-    let mut iter = PellSolutionIterator::new(13)?;
+    let iter = PellSolutionIterator::new(13)?;
     let mut palindrome_count = 0;
     let mut total_checked = 0;
     
